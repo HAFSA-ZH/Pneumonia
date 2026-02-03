@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pneumonia Detection</title>
+    <style>
+        /* Style général */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ece9e6, #ffffff);
+            color: #2c3e50;
+        }
+
+        h1 {
+            margin-top: 50px;
+            font-size: 40px;
+            letter-spacing: 1px;
+            color: #34495e;
+        }
+
+        /* Card principale */
+        .card {
+            background-color: #fff;
+            display: inline-block;
+            padding: 40px 60px;
+            margin-top: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Input et bouton */
+        input[type="file"] {
+            padding: 12px;
+            margin-top: 20px;
+            border-radius: 8px;
+            border: 1px solid #bdc3c7;
+        }
+
+        button {
+            padding: 12px 30px;
+            margin-top: 25px;
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        /* Image affichée */
+        img {
+            max-width: 300px;
+            border-radius: 15px;
+            margin-top: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Résultat de la prédiction */
+        .result {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 25px;
+            padding: 15px 25px;
+            border-radius: 15px;
+            display: inline-block;
+            color: white;
+            transition: background-color 0.5s ease, transform 0.3s ease;
+        }
+
+        .NORMAL {
+            background-color: #2ecc71; /* vert */
+        }
+
+        .PNEUMONIA {
+            background-color: #e74c3c; /* rouge */
+        }
+
+        .result:hover {
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media(max-width: 500px) {
+            .card {
+                padding: 20px 30px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            img {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Pneumonia Detection</h1>
+
+<div class="card">
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required><br>
+        <button type="submit">Upload & Predict</button>
+    </form>
+
+    {% if image_path %}
+        <img src="{{ image_path }}" alt="Uploaded Image">
+    {% endif %}
+
+    {% if prediction %}
+        <div class="result {{ prediction }}">
+            Prediction: {{ prediction }}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
